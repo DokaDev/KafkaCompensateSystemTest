@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ajax.shipping.model.dao.ShippingMapper">
+    <insert id="insertShippingInfo" parameterType="com.ajax.shipping.model.dto.ShippingDto" useGeneratedKeys="true" keyProperty="shippingId">
+        insert into tbl_shipping
+        values(null, #{orderId}, #{status}, #{createdAt}, #{shippingAddress})
+    </insert>
+</mapper>
