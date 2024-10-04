@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface OrderMapper {
     int saveOrder(OrderDto orderDto);
     OrderDto getOrderById(Long orderId);
+
+    int removeOrderById(Long orderId);
 }

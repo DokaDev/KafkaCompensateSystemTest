@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,5 +57,17 @@ public class OrderService {
 
     public OrderDto selectOrderById(Long orderId) {
         return orderMapper.getOrderById(orderId);
+    }
+
+    @Transactional
+    public void cancelOrder(Long orderId) {
+        System.out.println("Canceling order: " + orderId);
+        int result = orderMapper.removeOrderById(orderId);
+
+        if (result != 1) {
+            System.out.println("Failed to cancel order: " + orderId);
+            throw new RuntimeException("Failed to cancel order");
+        }
+        System.out.println("Order canceled: " + orderId);
     }
 }
